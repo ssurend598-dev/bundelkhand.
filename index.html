@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bundelkhand University, Jhansi - Provisional Statement of Marks</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #fff;
+      color: #111;
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 805px;
+      min-height: 250px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    .header {
+      height: 91px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #999;
+      padding-left: 102px;
+      position: relative;
+    }
+
+    .seal {
+      position: absolute;
+      left: 102px;
+      top: 2px;
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .heading {
+      margin-left: 102px;
+      line-height: 1.05;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .university {
+      color: #8a451d;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: .2px;
+    }
+
+    .subtitle {
+      color: #765544;
+      font-size: 19px;
+      margin-top: 5px;
+    }
+
+    .content {
+      padding-top: 40px;
+    }
+
+    .instruction {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 0 0 29px 7px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      margin-left: 18px;
+      gap: 0;
+    }
+
+    label {
+      font-size: 15px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .roll-label { width: 77px; }
+    .course-label { width: 98px; margin-left: 54px; }
+
+    input, select {
+      height: 22px;
+      border: 1px solid #888;
+      border-radius: 2px;
+      background: #fff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 14px;
+    }
+
+    #roll {
+      width: 158px;
+      padding: 2px 5px;
+    }
+
+    #course {
+      width: 350px;
+      padding: 1px 4px;
+    }
+
+    .button-row {
+      margin-top: 17px;
+      margin-left: 407px;
+    }
+
+    button {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      padding: 2px 8px;
+      height: 22px;
+      border: 1px solid #888;
+      border-radius: 2px;
+      background: #eee;
+      cursor: pointer;
+    }
+
+    .nep {
+      text-align: center;
+      margin-top: 7px;
+      padding-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1px;
+    }
+
+    .nep a {
+      color: #551a8b;
+      text-decoration: underline;
+      font-size: 16px;
+    }
+
+    .status {
+      text-align: center;
+      min-height: 20px;
+      margin-top: 5px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: #333;
+    }
+
+    @media (max-width: 700px) {
+      .page { padding: 0 12px; }
+      .header { padding-left: 0; height: auto; min-height: 90px; }
+      .seal { left: 0; }
+      .heading { margin-left: 98px; }
+      .university { font-size: 21px; }
+      .subtitle { font-size: 15px; }
+      .form-row { flex-wrap: wrap; margin-left: 0; }
+      .course-label { margin-left: 0; margin-top: 12px; }
+      #course { width: min(350px, 100%); }
+      .button-row { margin-left: 0; margin-top: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <img class="seal" src="university-seal.jpg" alt="University Seal">
+      <div class="heading">
+        <div class="university">Bundelkhand University, Jhansi</div>
+        <div class="subtitle">Provisional Statement of Marks</div>
+      </div>
+    </header>
+
+    <section class="content">
+      <p class="instruction">Enter your Roll No. and choose course to view your provisional marks</p>
+
+      <form id="resultForm">
+        <div class="form-row">
+          <label class="roll-label" for="roll">Roll No :</label>
+          <input id="roll" name="roll" type="text" autocomplete="off">
+
+          <label class="course-label" for="course">Course :</label>
+          <select id="course" name="course">
+            <option value="">-Select-</option>
+            <option>B.A.</option>
+            <option>B.Sc.</option>
+            <option>B.Com.</option>
+            <option>M.A.</option>
+            <option>M.Sc.</option>
+            <option>M.Com.</option>
+          </select>
+        </div>
+
+        <div class="button-row">
+          <button type="submit">View Result</button>
+        </div>
+      </form>
+
+      <div class="nep">
+        <a href="#" id="nepLink">NEP Result GO</a>
+      </div>
+      <div class="status" id="status"></div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("resultForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const roll = document.getElementById("roll").value.trim();
+      const course = document.getElementById("course").value;
+      const status = document.getElementById("status");
+
+      if (!roll || !course) {
+        status.textContent = "Please enter Roll No. and select Course.";
+        return;
+      }
+
+      status.textContent = "Result lookup demo — connect this form to your result database/API.";
+    });
+
+    document.getElementById("nepLink").addEventListener("click", function(e) {
+      e.preventDefault();
+      document.getElementById("status").textContent = "NEP Result link demo.";
+    });
+  </script>
+</body>
+</html>
